@@ -59,6 +59,7 @@ typedef struct sspan_s
 extern cvar_t	d_subdiv16;
 
 extern cvar_t	d_texdither;
+extern cvar_t	d_potato;
 
 extern float	scale_for_mip;
 
@@ -76,7 +77,7 @@ fixed16_t	bbextents, bbextentt;
 
 void D_DrawSpans8 (espan_t *pspans);
 void D_DrawSpans8_dither(espan_t* pspans);
-void D_DrawSpans8_low(espan_t* pspans);
+void D_DrawSpans8_potato(espan_t* pspans);
 void D_DrawSpans16 (espan_t *pspans);
 void D_DrawSpans16_dither(espan_t* pspans);
 void D_DrawZSpans (espan_t *pspans);
