@@ -42,7 +42,7 @@ int     D_SurfaceCacheForRes (int width, int height)
 		return size;
 	}
 	
-	size = SURFCACHE_SIZE_AT_320X200;
+	size = SURFCACHE_SIZE_AT_800X600;
 
 	pix = width*height;
 	if (pix > 64000)

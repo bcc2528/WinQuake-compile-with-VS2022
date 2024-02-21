@@ -33,6 +33,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #define DS_SPAN_LIST_END	-128
 
 #define SURFCACHE_SIZE_AT_320X200	600*1024
+#define SURFCACHE_SIZE_AT_640X480	3072*1024
+#define SURFCACHE_SIZE_AT_800X600	4096*1024
 
 typedef struct surfcache_s
 {
@@ -56,6 +58,8 @@ typedef struct sspan_s
 
 extern cvar_t	d_subdiv16;
 
+extern cvar_t	d_texdither;
+
 extern float	scale_for_mip;
 
 extern qboolean		d_roverwrapped;
@@ -71,7 +75,10 @@ fixed16_t	bbextents, bbextentt;
 
 
 void D_DrawSpans8 (espan_t *pspans);
+void D_DrawSpans8_dither(espan_t* pspans);
+void D_DrawSpans8_low(espan_t* pspans);
 void D_DrawSpans16 (espan_t *pspans);
+void D_DrawSpans16_dither(espan_t* pspans);
 void D_DrawZSpans (espan_t *pspans);
 void Turbulent8 (espan_t *pspan);
 void D_SpriteDrawSpans (sspan_t *pspan);

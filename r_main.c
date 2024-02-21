@@ -136,7 +136,6 @@ cvar_t	r_maxedges = {"r_maxedges", "0"};
 cvar_t	r_numedges = {"r_numedges", "0"};
 cvar_t	r_aliastransbase = {"r_aliastransbase", "200"};
 cvar_t	r_aliastransadj = {"r_aliastransadj", "100"};
-cvar_t	r_texdither = { "r_texdither", "0" };
 
 extern cvar_t	scr_fov;
 
@@ -222,7 +221,6 @@ void R_Init (void)
 	Cvar_RegisterVariable (&r_numedges);
 	Cvar_RegisterVariable (&r_aliastransbase);
 	Cvar_RegisterVariable (&r_aliastransadj);
-	Cvar_RegisterVariable (&r_texdither);
 
 	Cvar_SetValue ("r_maxedges", (float)NUMSTACKEDGES);
 	Cvar_SetValue ("r_maxsurfs", (float)NUMSTACKSURFACES);

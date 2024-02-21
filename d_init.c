@@ -24,9 +24,10 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #define NUM_MIPS	4
 
-cvar_t	d_subdiv16 = {"d_subdiv16", "1"};
+cvar_t	d_subdiv16 = {"d_subdiv16", "0"};
 cvar_t	d_mipcap = {"d_mipcap", "0"};
-cvar_t	d_mipscale = {"d_mipscale", "1"};
+cvar_t	d_mipscale = {"d_mipscale", "0"};
+cvar_t	d_texdither = { "d_texdither", "0" };
 
 surfcache_t		*d_initial_rover;
 qboolean		d_roverwrapped;
@@ -53,6 +54,7 @@ void D_Init (void)
 	Cvar_RegisterVariable (&d_subdiv16);
 	Cvar_RegisterVariable (&d_mipcap);
 	Cvar_RegisterVariable (&d_mipscale);
+	Cvar_RegisterVariable (&d_texdither);
 
 	r_drawpolys = false;
 	r_worldpolysbacktofront = false;
@@ -151,7 +153,20 @@ void D_SetupFrame (void)
 				else
 					d_drawspans = D_DrawSpans8;
 #else
-				d_drawspans = D_DrawSpans8;
+	if (d_subdiv16.value)
+	{
+		if (d_texdither.value)
+			d_drawspans = D_DrawSpans16_dither;
+		else
+			d_drawspans = D_DrawSpans16;
+	}
+	else
+	{
+		if (d_texdither.value)
+			d_drawspans = D_DrawSpans8_dither;
+		else
+			d_drawspans = D_DrawSpans8;
+	}
 #endif
 
 	d_aflatcolor = 0;
