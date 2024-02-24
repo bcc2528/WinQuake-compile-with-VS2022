@@ -452,6 +452,7 @@ void R_RecursiveWorldNode (mnode_t *node, int clipflags)
 	mplane_t	*plane;
 	msurface_t	*surf, **mark;
 	mleaf_t		*pleaf;
+	clipplane_t *cp;
 	double		d, dot;
 
 	if (node->contents == CONTENTS_SOLID)
@@ -480,18 +481,18 @@ void R_RecursiveWorldNode (mnode_t *node, int clipflags)
 			rejectpt[1] = (float)node->minmaxs[pindex[1]];
 			rejectpt[2] = (float)node->minmaxs[pindex[2]];
 			
-			d = DotProduct (rejectpt, view_clipplanes[i].normal);
-			d -= view_clipplanes[i].dist;
+			cp = &view_clipplanes[i];
+
+			d = DotProduct (rejectpt, cp->normal) - cp->dist;
 
 			if (d <= 0)
 				return;
 
-			acceptpt[0] = (float)node->minmaxs[pindex[3+0]];
-			acceptpt[1] = (float)node->minmaxs[pindex[3+1]];
-			acceptpt[2] = (float)node->minmaxs[pindex[3+2]];
+			acceptpt[0] = (float)node->minmaxs[pindex[3]];
+			acceptpt[1] = (float)node->minmaxs[pindex[4]];
+			acceptpt[2] = (float)node->minmaxs[pindex[5]];
 
-			d = DotProduct (acceptpt, view_clipplanes[i].normal);
-			d -= view_clipplanes[i].dist;
+			d = DotProduct (acceptpt, cp->normal) - cp->dist;
 
 			if (d >= 0)
 				clipflags &= ~(1<<i);	// node is entirely on screen
